@@ -53,16 +53,16 @@ DELAY_1mS	PROC
 		; MOV A, x
 		MOV DEL2, A				; execute y fec
 		DELAY_1ms_INNER:		; execute (3x-1) * y fec
-			SDZ DEL2			; 	execute 1*(x-1) + 2 fec
-								; 		SDZ is a two-stage pipeline instruction cost one fec.
-								; 		in normal situation it only execute decrease and if statement, cost one fec.
-								; 		but once it match zero, it will cost two fec due to skipping instruction.
-			JMP DELAY_1ms_INNER	; 	execute 2*(x-1) fec
+			SDZ DEL2			;     execute 1*(x-1) + 2 fec
+								;       SDZ is a two-stage pipeline instruction cost one fec.
+								;       in normal situation it only execute decrease and if statement, cost one fec.
+								;       but once it match zero, it will cost two fec due to skipping instruction.
+			JMP DELAY_1ms_INNER	;     execute 2*(x-1) fec
 		SDZ DEL1				; execute 1*(y-1) + 2 fec
 		JMP DELAY_1ms_OUTTER	; execute 2*(y-1) fec
 	RET							; execute 2 fec
 								; Total: 1 + 1 + y + y + 3xy - y + y - 1 + 2 + 2y- 2
-								; 		= 3xy + 4y + 1
+								;        = 3xy + 4y + 1
 								; After calcaulation, if y = 2, x = 165 is close to 1000 which is 994 instructions.
 DELAY_1mS	ENDP
 
