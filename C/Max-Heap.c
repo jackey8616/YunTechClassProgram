@@ -69,7 +69,7 @@ void maxHeapify(int *array, int root, int arrayLength) {
 
 int main(void) {
 	/*
-		Program : Max-Heap
+		Program : Max-Heap 
 		Function:
 			Allow user input/insert node with a value,
 			able to remove any node whatever user want to,
