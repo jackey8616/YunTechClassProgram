@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <memory.h>
 
 void printArray(int *array, int arrayLength) {
 	int i = 0;
@@ -20,32 +21,25 @@ int *addNode(int *array, int *arrayLength, int value) {
 	return arrayPtr;
 }
 
-void insNode(int *array, int arrayLength, int position, int value) {
-	if(position > arrayLength || position <= 0) {
-		printf("> Position error.\n");
-		return;
-	} else if(position == arrayLength) {
-		printf("> Please use (1)Add to insert last node.\n");
-		return;
-	} else if(array[position] != 0) {
-		printf("> Original value at position %d is %d, replace to %d.\n", position, array[position], value);	
-	}
-	array[position] = value;
-	return;
-}
-
-int *delNode(int *array, int *arrayLength, int position) {
+int *insNode(int *array, int *arrayLength, int position, int value) {
 	if(position > *arrayLength || position <= 0) {
 		printf("> Position error.\n");
 		return array;
+	} else {
+        int *arrayPtr = (int *)malloc((++*arrayLength) * sizeof(int));
+        memcpy(arrayPtr, array, position * sizeof(int));
+        arrayPtr[position] = value;
+        memcpy(&arrayPtr[position + 1], &array[position], (*arrayLength - 1 - position) * sizeof(int));
+        return arrayPtr;
 	}
-		
-	if(position * 2 <= *arrayLength)
-		delNode(array, arrayLength, position * 2);
-	if(position * 2 + 1 <= *arrayLength)
-		delNode(array, arrayLength, position * 2 + 1);
-	array[position] = -1;
-	return array;
+}
+
+int *delNode(int *array, int *arrayLength) {
+    array[1] = 0;
+    int *arrayPtr = (int *)malloc((--*arrayLength) * sizeof(int));
+    memcpy(arrayPtr, &array[1], *arrayLength * sizeof(int));
+    free(array);
+    return arrayPtr;
 }
 
 void swap(int *nodeA, int *nodeB) {
@@ -81,7 +75,6 @@ int main(void) {
 	do {
 		printf("(0) Add\n(1) Insert\n(2) Delete\n(3) Print\n(4) Max-Heapify\n(-1) Exit\n>");
 		scanf("%d", &action);
-		system("cls");
 		switch(action) {
 			case 0: {
 				printf(">>> Input add value: ");
@@ -96,14 +89,12 @@ int main(void) {
 				scanf("%d", &position);
 				printf(">>> Input insert value: ");
 				scanf("%d", &value);
-				insNode(array, arrayLength, position, value);
+				array = insNode(array, &arrayLength, position, value);
 				printArray(array, arrayLength);
 				break;
 			}
 			case 2: {
-				printf(">>> Input Delete position: ");
-				scanf("%d", &value);
-				delNode(array, &arrayLength, value);
+				array = delNode(array, &arrayLength);
 				printArray(array, arrayLength);
 				break;
 			}
