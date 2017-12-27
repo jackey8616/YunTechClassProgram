@@ -33,8 +33,8 @@ INIT:
 	; TM0C0 Setup:
 	;     T0PAU = 0        Counter Pause
 	;     T0CK[2:0] = 000  fint = fsys / 4
-    ;     T0ON = 0         Counter Stop
-    ;     T0RP[2:0] = 000  Period = 1024 / fint HT66F20 Only
+	;     T0ON = 0         Counter Stop
+	;     T0RP[2:0] = 000  Period = 1024 / fint HT66F20 Only
 	MOV A, 00000000b
 	MOV TM0C0, A
 	; TM0C1 Setup:
@@ -43,7 +43,7 @@ INIT:
 	;     T0OC = 0         TP0_0 and TP0_1's output control bit. not use
 	;     T0POL = 0        TP0_0 and TP0_1's polarity control bit. not use
 	;     T0DPX = 0        In time/counter mode, no function
-	;     T0CCLR = 1       When Register AC match then clear counter.
+	;     T0CCLR = 1       When Register ACC match then clear counter.
 	MOV A,11000001b
 	MOV TM0C1, A
 	
