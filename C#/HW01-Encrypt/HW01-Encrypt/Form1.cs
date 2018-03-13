@@ -19,99 +19,74 @@ namespace HW01_Encrypt
             InitializeComponent();
         }
 
-        public String AesEncrypt(String inputData, String inputKey) {
+        public String AesEncrypt(String inputData) {
             string encrypt = "";
-            try
-            {
+            try {
                 AesCryptoServiceProvider aes = new AesCryptoServiceProvider();
-                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
                 SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
-                byte[] key = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputKey));
-                byte[] iv = md5.ComputeHash(Encoding.UTF8.GetBytes(inputKey));
-                aes.Key = key;
-                aes.IV = iv;
-
+                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+                aes.Key = sha256.ComputeHash(Encoding.UTF8.GetBytes("1111111"));
+                aes.IV = md5.ComputeHash(Encoding.UTF8.GetBytes("1111111"));
                 byte[] dataByteArray = Encoding.UTF8.GetBytes(inputData);
-                using (MemoryStream ms = new MemoryStream())
-                using (CryptoStream cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
-                {
-                    cs.Write(dataByteArray, 0, dataByteArray.Length);
-                    cs.FlushFinalBlock();
-                    encrypt = Convert.ToBase64String(ms.ToArray());
+                using (MemoryStream ms = new MemoryStream()) {
+                    using (CryptoStream cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write)) {
+                        cs.Write(dataByteArray, 0, dataByteArray.Length);
+                        cs.FlushFinalBlock();
+                        encrypt = Convert.ToBase64String(ms.ToArray());
+                    }
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.Windows.Forms.MessageBox.Show(e.Message);
             }
             return encrypt;
         }
 
-        public String AesDecrpt(String inputData, String inputKey) {
+        public String AesDecrpt(String inputData) {
             string decrypt = "";
-            try
-            {
+            try {
                 AesCryptoServiceProvider aes = new AesCryptoServiceProvider();
-                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
                 SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
-                byte[] key = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputKey));
-                byte[] iv = md5.ComputeHash(Encoding.UTF8.GetBytes(inputKey));
-                aes.Key = key;
-                aes.IV = iv;
-
+                MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+                aes.Key = sha256.ComputeHash(Encoding.UTF8.GetBytes("1111111"));
+                aes.IV = md5.ComputeHash(Encoding.UTF8.GetBytes("1111111"));
                 byte[] dataByteArray = Convert.FromBase64String(inputData);
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
+                using (MemoryStream ms = new MemoryStream()) {
+                    using (CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write)) {
                         cs.Write(dataByteArray, 0, dataByteArray.Length);
                         cs.FlushFinalBlock();
                         decrypt = Encoding.UTF8.GetString(ms.ToArray());
                     }
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.Windows.Forms.MessageBox.Show(e.Message);
             }
             return decrypt;
         }
 
-        public String DesEncrypt(String inpuData, String inputKey) {
-            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
-            byte[] key = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputKey));
-            byte[] iv = md5.ComputeHash(Encoding.UTF8.GetBytes(inputKey));
-            byte[] dataByteArray = Encoding.UTF8.GetBytes(inpuData);
-
-            des.Key = key;
-            des.IV = iv;
+        public String DesEncrypt(String inpuData) {
             string encrypt = "";
-            using (MemoryStream ms = new MemoryStream())
-            using (CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write))
-            {
-                cs.Write(dataByteArray, 0, dataByteArray.Length);
-                cs.FlushFinalBlock();
-                encrypt = Convert.ToBase64String(ms.ToArray());
+            try {
+                DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+                byte[] dataByteArray = Encoding.UTF8.GetBytes(inpuData);
+
+                using (MemoryStream ms = new MemoryStream()) {
+                    using (CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(Encoding.UTF8.GetBytes("11111111"), Encoding.UTF8.GetBytes("11111111")), CryptoStreamMode.Write))               {
+                        cs.Write(dataByteArray, 0, dataByteArray.Length);
+                        cs.FlushFinalBlock();
+                        encrypt = Convert.ToBase64String(ms.ToArray());
+                    }
+                }
+            } catch (Exception e) {
+                System.Windows.Forms.MessageBox.Show(e.Message);
             }
             return encrypt;
         }
 
-        public String DesDecrypt(String inputData, String inputKey) {
+        public String DesDecrypt(String inputData) {
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            SHA256CryptoServiceProvider sha256 = new SHA256CryptoServiceProvider();
-            byte[] key = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputKey));
-            byte[] iv = md5.ComputeHash(Encoding.UTF8.GetBytes(inputKey));
-            des.Key = key;
-            des.IV = iv;
-
             byte[] dataByteArray = Convert.FromBase64String(inputData);
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write))
-                {
+            using (MemoryStream ms = new MemoryStream()) {
+                using (CryptoStream cs = new CryptoStream(ms, des.CreateDecryptor(Encoding.UTF8.GetBytes("11111111"), Encoding.UTF8.GetBytes("11111111")), CryptoStreamMode.Write)) {
                     cs.Write(dataByteArray, 0, dataByteArray.Length);
                     cs.FlushFinalBlock();
                     return Encoding.UTF8.GetString(ms.ToArray());
@@ -121,12 +96,12 @@ namespace HW01_Encrypt
 
         private void encryptAesBtn_Click(object sender, EventArgs e)
         {
-            outputBox.Text = this.AesEncrypt(inputBox.Text, keyBox.Text);
+            outputBox.Text = this.AesEncrypt(inputBox.Text);
         }
 
         private void decryptAesBtn_Click(object sender, EventArgs e)
         {
-            outputBox.Text = this.AesDecrpt(inputBox.Text, keyBox.Text);
+            outputBox.Text = this.AesDecrpt(inputBox.Text);
         }
 
         private void swapBtn_Click(object sender, EventArgs e)
@@ -145,32 +120,41 @@ namespace HW01_Encrypt
         {
             outputBox.Text = "";
         }
-
-        private void clearKeyBtn_Click(object sender, EventArgs e)
-        {
-            keyBox.Text = "";
-        }
-
+        
         private void clearAllBtn_Click(object sender, EventArgs e)
         {
             inputBox.Text = "";
             outputBox.Text = "";
-            keyBox.Text = "";
-        }
-
-        private void keyRandomBtn_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void desEncryptBtn_Click(object sender, EventArgs e)
         {
-            outputBox.Text = DesEncrypt(inputBox.Text, keyBox.Text);
+            outputBox.Text = DesEncrypt(inputBox.Text);
         }
 
         private void desDecryptBtn_Click(object sender, EventArgs e)
         {
-            outputBox.Text = DesDecrypt(inputBox.Text, keyBox.Text);
+            outputBox.Text = DesDecrypt(inputBox.Text);
+        }
+
+        private void openFileBtn_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                System.IO.StreamReader sr = new System.IO.StreamReader(openFileDialog1.FileName);
+                inputBox.Text = sr.ReadToEnd();
+                sr.Close();
+            }
+            aesEncryptBtn.Enabled = true;
+            desEncryptBtn.Enabled = true;
+        }
+
+        private void saveFileBtn_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+                System.IO.StreamWriter sw = new System.IO.StreamWriter(saveFileDialog1.FileName);
+                sw.Write(outputBox.Text);
+                sw.Close();
+            }
         }
     }
 }
