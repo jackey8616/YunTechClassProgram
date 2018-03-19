@@ -22,7 +22,7 @@ public class HW01 {
             } else {
                 boolean match = false;
                 for(Interpreter each : inter) {
-                    if(each.s.equals(input)) {
+                    if(each.s.equals(input.toUpperCase())) {
                         each.printG();
                         match = true;
                     } else if (isNumber(input) && each.include(input)){
