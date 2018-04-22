@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Collections;
+using System.Timers;
 
 namespace HW02_MST
 {
@@ -133,6 +134,11 @@ namespace HW02_MST
         private void drawMstBtn_Click(object sender, EventArgs e)
         {
             Graphics G = Graphics.FromImage(drawZone.Image);
+        
+            // Drawing Vertex rectangle.
+            foreach (Point p in pos.Values)
+                G.FillRectangle(new SolidBrush(Color.Green), new Rectangle(p, new Size(20, 20)));
+
             foreach (Edge edge in mstG.getEdges()) {
                 Point src = pos[edge.getSrc().getName()];
                 Point dst = pos[edge.getDst().getName()];
@@ -142,16 +148,17 @@ namespace HW02_MST
 
                 Point lineCenter = new Point((src.X + dst.X) / 2, (src.Y + dst.Y) / 2);
                 G.DrawString(edge.getWeight().ToString(), new Font(new FontFamily("新細明體"), 8.0F), new SolidBrush(Color.Red), lineCenter);
-            }
-            // Drawing Vertex rectangle.
-            foreach (Point p in pos.Values)
-                G.FillRectangle(new SolidBrush(Color.Green), new Rectangle(p, new Size(20, 20)));
-            // Drawing Vertex name.
-            foreach (String name in pos.Keys)
-            {
-                Point p = pos[name];
-                p.Offset(5, 5);
-                G.DrawString(name, new Font(new FontFamily("新細明體"), 8.0F), new SolidBrush(Color.White), p);
+                System.Threading.Thread.Sleep(1000);
+                // Drawing Vertex rectangle.
+                foreach (Point p in pos.Values)
+                    G.FillRectangle(new SolidBrush(Color.Green), new Rectangle(p, new Size(20, 20)));
+                // Drawing Vertex name.
+               foreach (String name in pos.Keys) {
+                    Point p = pos[name];
+                    p.Offset(5, 5);
+                    G.DrawString(name, new Font(new FontFamily("新細明體"), 8.0F), new SolidBrush(Color.White), p);
+                }
+                drawZone.Refresh();
             }
             drawZone.Refresh();
         }

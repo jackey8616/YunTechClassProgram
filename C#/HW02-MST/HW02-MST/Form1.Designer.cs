@@ -44,9 +44,9 @@
             // 
             this.readFileBtn.Location = new System.Drawing.Point(704, 12);
             this.readFileBtn.Name = "readFileBtn";
-            this.readFileBtn.Size = new System.Drawing.Size(167, 23);
+            this.readFileBtn.Size = new System.Drawing.Size(190, 23);
             this.readFileBtn.TabIndex = 0;
-            this.readFileBtn.Text = "Read";
+            this.readFileBtn.Text = "1. Read";
             this.readFileBtn.UseVisualStyleBackColor = true;
             this.readFileBtn.Click += new System.EventHandler(this.readFileBtn_Click);
             // 
@@ -61,9 +61,9 @@
             this.primBtn.Enabled = false;
             this.primBtn.Location = new System.Drawing.Point(789, 41);
             this.primBtn.Name = "primBtn";
-            this.primBtn.Size = new System.Drawing.Size(82, 23);
+            this.primBtn.Size = new System.Drawing.Size(105, 23);
             this.primBtn.TabIndex = 1;
-            this.primBtn.Text = "Prim MST";
+            this.primBtn.Text = "3.1 Prim MST";
             this.primBtn.UseVisualStyleBackColor = true;
             this.primBtn.Click += new System.EventHandler(this.primBtn_Click);
             // 
@@ -72,9 +72,9 @@
             this.kruskalBtn.Enabled = false;
             this.kruskalBtn.Location = new System.Drawing.Point(789, 70);
             this.kruskalBtn.Name = "kruskalBtn";
-            this.kruskalBtn.Size = new System.Drawing.Size(82, 23);
+            this.kruskalBtn.Size = new System.Drawing.Size(105, 23);
             this.kruskalBtn.TabIndex = 2;
-            this.kruskalBtn.Text = "Kruskal MST";
+            this.kruskalBtn.Text = "3.2 Kruskal MST";
             this.kruskalBtn.UseVisualStyleBackColor = true;
             this.kruskalBtn.Click += new System.EventHandler(this.kruskalBtn_Click);
             // 
@@ -82,9 +82,9 @@
             // 
             this.exitBtn.Location = new System.Drawing.Point(704, 99);
             this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(167, 23);
+            this.exitBtn.Size = new System.Drawing.Size(190, 23);
             this.exitBtn.TabIndex = 3;
-            this.exitBtn.Text = "Exit";
+            this.exitBtn.Text = "5. Exit";
             this.exitBtn.UseVisualStyleBackColor = true;
             this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
@@ -94,7 +94,7 @@
             this.outputTxt.Multiline = true;
             this.outputTxt.Name = "outputTxt";
             this.outputTxt.ReadOnly = true;
-            this.outputTxt.Size = new System.Drawing.Size(167, 310);
+            this.outputTxt.Size = new System.Drawing.Size(190, 310);
             this.outputTxt.TabIndex = 4;
             // 
             // drawZone
@@ -110,9 +110,9 @@
             this.drawBtn.Enabled = false;
             this.drawBtn.Location = new System.Drawing.Point(704, 41);
             this.drawBtn.Name = "drawBtn";
-            this.drawBtn.Size = new System.Drawing.Size(79, 23);
+            this.drawBtn.Size = new System.Drawing.Size(85, 23);
             this.drawBtn.TabIndex = 6;
-            this.drawBtn.Text = "Draw";
+            this.drawBtn.Text = "2. Draw";
             this.drawBtn.UseVisualStyleBackColor = true;
             this.drawBtn.Click += new System.EventHandler(this.drawBtn_Click);
             // 
@@ -121,9 +121,9 @@
             this.drawMstBtn.Enabled = false;
             this.drawMstBtn.Location = new System.Drawing.Point(704, 70);
             this.drawMstBtn.Name = "drawMstBtn";
-            this.drawMstBtn.Size = new System.Drawing.Size(79, 23);
+            this.drawMstBtn.Size = new System.Drawing.Size(85, 23);
             this.drawMstBtn.TabIndex = 7;
-            this.drawMstBtn.Text = "Draw MST";
+            this.drawMstBtn.Text = "4. Draw MST";
             this.drawMstBtn.UseVisualStyleBackColor = true;
             this.drawMstBtn.Click += new System.EventHandler(this.drawMstBtn_Click);
             // 
@@ -131,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 450);
+            this.ClientSize = new System.Drawing.Size(912, 450);
             this.Controls.Add(this.drawMstBtn);
             this.Controls.Add(this.drawBtn);
             this.Controls.Add(this.drawZone);
