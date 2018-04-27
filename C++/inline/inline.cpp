@@ -19,12 +19,12 @@ int main(void) {
 
         for(int i = 0; i < exeN; ++i) {
             long double result = withInline(i);
-            cout << result << endl;
+            cout << result << " ";
             //cout << "FACT(" << i << ")=" << result << endl;
         }
 
         endTime = time(0);
-        cout << "EndTime " << endTime << " | ";
+        cout << endl << "EndTime " << endTime << " | ";
         exeTime = endTime - startTime;
         cout << "ExeTime " << exeTime << endl;
     }
