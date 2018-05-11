@@ -21,7 +21,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return this.clazz.value() + "\t" + this.id + "\t" + this.name + "\t" + this.sex + "\t" + this.score;
+        return this.clazz.value() + "\t" + this.id + "\t" + this.name + "\t" + (this.sex.values().equals("F") ? "女" : "男") + "\t" + this.score;
     }
 
 }
