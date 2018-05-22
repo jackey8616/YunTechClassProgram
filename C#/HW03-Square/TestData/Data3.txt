@@ -1,0 +1,104 @@
+6
+20 20 20
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+bbaababbbbaababaabbb
+abaabaababbabbaabaaa
+aaabaaaabbbbbbababbb
+baabbbabaabbbbabbaab
+babbbababaabbabbaaab
+abbbabaaaabbbbbbaaaa
+bababababbaaabbaabab
+bbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbb
+18 14
+2 15
+18 8
+12 10
+15 6
+11 3
+8 5
+14 17
+7 11
+19 11
+2 8
+9 16
+16 19
+13 16
+13 3
+14 17
+6 6
+9 4
+4 1
+9 17
+7 23 3
+.......................
+..ccccc..ppppp..eeeee..
+..c......p...p..e......
+..c......ppppp..eeeee..
+..c......p......e......
+..ccccc..p......eeeee..
+.......................
+3 5
+5 12
+3 16
+6 5 2
+sswss
+sssss
+sssss
+sssss
+sssss
+ssssz
+2 2
+3 2
+12 3 4
+aab
+aaa
+aaa
+baa
+aaa
+aaa
+aaa
+aaa
+baa
+aaa
+aaa
+aab
+1 1
+4 1
+7 1
+10 1
+8 8 4
+aaaaabbb
+aaaaabbb
+aaaaabbb
+aaaccccc
+aaaccccc
+aaaccccc
+aaaccccc
+aaaccccc
+5 5
+3 3
+1 2
+2 1
+7 10 4
+abbbaaaaaa
+abbbaaaaaa
+abbbaaaaaa
+aaaaaaaaaa
+aaaaaaaaaa
+aaccaaaaaa
+aaccaaaaaa
+1 2
+2 4
+4 6
+5 2
