@@ -67,46 +67,23 @@ Strategy:
 	
 Direction:
 
-	# Get Snake X on bitmap
-	# $t0 = address.0 mod 4
-	and $t3, $s1, 15		# Get last byte( 8 bits) of snake address
-	addi $t5, $zero, 4		# Move 4 into $t5
-	div $t3, $t5			# Divide last byte with 4
-	mflo $t0			# Get divide mod into $t0
-	# $t0 += address.1 * 4
-	srl $t3, $s1, 4			# Shift 8 bits to right
-	addi $t5, $zero, 8
-	div $t3, $t5
-	mfhi $t3
-	sll $t3, $t3, 2
-	add $t0, $t0, $t3
+GetHeadXY:
+	subi $t0, $s1, 0x10008000
+	div $t0, $t0, 0x80
+	mfhi $t0
+	mflo $t1			# HeadY
+	div $t0, $t0, 4			# HeadX
 	
-	# Get Snake Y on bitmap
-	sub $t3, $s1, 0x10008080
-	addi $t5, $zero, 128
-	div $t3, $t5
-	mflo $t1
-	addi $t1, $t1, 1
-	
-	# Print now X, Y
-#	li $v0,4
-#	la $a0, Xstr
-#	syscall
-#	li $v0, 1
-#	add $a0, $zero, $t0
-#	syscall
-#	li $v0, 4
-#	la $a0, dot
-#	syscall
-#	li $v0, 4
-#	la $a0, Ystr
-#	syscall
-#	li $v0, 1
-#	add $a0, $zero, $t1
-#	syscall
-#	li $v0, 4
-#	la $a0, newline
-#	syscall
+GetTailXY:
+	subi $s3, $s3, 1
+	sll $s3, $s3, 2
+	add $t2, $s0, $s3
+	lw $t2, ($t2)
+	subi $t2, $t2, 0x10008000
+	div $t2, $t2, 0x80
+	mfhi $t2
+	mflo $t3			# TailY
+	div $t2, $t2, 4			# TailX
 
 
 #	$s4	food.X
@@ -119,12 +96,12 @@ Direction:
 	bgt $t0, $s4, left
 	bgt $s4, $t0, right
 
+
 #	beq $a3, 0x73,under		#Check if it is 's'
 #	beq $a3, 0x64,right		#Check if it is 'd'
 #	beq $a3, 0x61,left		#Check if it is 'a'
-#	beq $a3, 0x77, up		#Check if it is 'w'
-	
-	j Strategy				#Thread sleep and Key check loop
+#	beq $a3, 0x77, up		#Check if it is 'w'	
+#	j Strategy				#Thread sleep and Key check loop
 	
 #################################################################	
 #execution(NEW snake head address)
@@ -132,26 +109,53 @@ under:
 	la $s0, snakeaddress		#Load the head address to $s0
 	lw $s2,($s0)			#Load old head address to $s2
 	addi $s1,$s2,128		#New head address to $s1
-	j judge			#goto judge	
-
+	
+	lw $t4, snakecolor
+	lw $t5, ($s1)
+	beq $t4, $t5, underBodyEat
+	j judge
+underBodyEat:
+	bgt $t0, $t2, left
+	j right
+##################################################################
 right:
 	la $s0, snakeaddress		#Load the head address to $s0
 	lw $s2,($s0)			#Load old head address
 	addi $s1,$s2,4			#New head address
+	
+	lw $t4, snakecolor
+	lw $t5, ($s1)
+	beq $t4, $t5, rightBodyEat
 	j judge
-
+rightBodyEat:
+	bgt $t1 $t3, up
+	j under
+##################################################################
 left:
 	la $s0, snakeaddress		#Load the head address to $s0
 	lw $s2,($s0)			#Load old head address
 	subi $s1,$s2,4			#New head address
+	
+	lw $t4, snakecolor
+	lw $t5, ($s1)
+	beq $t4, $t5, leftBodyEat
 	j judge
-
+leftBodyEat:
+	bgt $t1, $t3, up
+	j under
+##################################################################
 up:
 	la $s0, snakeaddress		#Load the head address to $s0
 	lw $s2,($s0)			#Load old head address
 	subi $s1,$s2,128		#New head address
-	j judge
 	
+	lw $t4, snakecolor
+	lw $t5, ($s1)
+	beq $t4, $t5, upBodyEat
+	j judge
+upBodyEat:
+	bgt $t0, $t2, left
+	j right
 ##################################################################
 judge:
 	
